@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SplitMate – Roommate Expense Splitter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <span class="logo-icon">🏠</span>
+      <span class="logo-text">Split<em>Mate</em></span>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
+      <button class="nav-btn" onclick="showSection('expenses')">Expenses</button>
+      <button class="nav-btn" onclick="showSection('roommates')">Roommates</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- ─── DASHBOARD SECTION ─── -->
+    <section id="dashboard" class="section active">
+      <div class="page-title">
+        <h1>Overview</h1>
+        <p>See who owes what at a glance</p>
+      </div>
+
+      <div class="stats-grid" id="statsGrid">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="card mt">
+        <h2 class="card-title">⚖️ Who Owes Whom</h2>
+        <div id="balanceSummary" class="balance-list">
+          <p class="empty-msg">No balances yet. Add some expenses!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── EXPENSES SECTION ─── -->
+    <section id="expenses" class="section">
+      <div class="page-title">
+        <h1>Expenses</h1>
+        <p>Add, edit, and track all shared costs</p>
+      </div>
+
+      <!-- Add Expense Form -->
+      <div class="card">
+        <h2 class="card-title">➕ Add New Expense</h2>
+        <form id="expenseForm" class="form-grid">
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" id="desc" placeholder="e.g. Grocery shopping" required />
+          </div>
+          <div class="form-group">
+            <label>Amount (₹)</label>
+            <input type="number" id="amount" placeholder="e.g. 1200" min="1" required />
+          </div>
+          <div class="form-group">
+            <label>Paid By</label>
+            <select id="paidBy" required>
+              <option value="">-- Select Roommate --</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Split Among</label>
+            <div id="splitAmong" class="checkbox-group">
+              <p class="empty-msg">Add roommates first to split expenses</p>
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Add Expense</button>
+            <button type="button" class="btn btn-ghost" id="cancelEditBtn" style="display:none" onclick="cancelEdit()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Expense List -->
+      <div class="card mt">
+        <h2 class="card-title">📋 All Expenses</h2>
+        <div id="expenseList" class="expense-list">
+          <p class="empty-msg">No expenses yet. Add one above!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ROOMMATES SECTION ─── -->
+    <section id="roommates" class="section">
+      <div class="page-title">
+        <h1>Roommates</h1>
+        <p>Manage the people in your household</p>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">🙋 Add Roommate</h2>
+        <form id="roommateForm" class="form-inline">
+          <input type="text" id="roommateName" placeholder="Enter full name" required />
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+
+      <div class="card mt">
+        <h2 class="card-title">👥 Your Household</h2>
+        <div id="roommateList" class="roommate-grid">
+          <p class="empty-msg">No roommates added yet.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
